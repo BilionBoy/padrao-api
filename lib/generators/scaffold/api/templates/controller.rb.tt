@@ -1,50 +1,52 @@
-# frozen_string_literal: true
-class <%= controller_class_name %>Controller < ApplicationController
-  before_action :set_<%= singular_table_name %>, only: %i[show update destroy]
+module V1
 
-  rescue_from ActiveRecord::RecordNotFound, with: :handle_not_found
+  class <%= controller_class_name %>Controller < ApplicationController
+    before_action :set_<%= singular_table_name %>, only: %i[show update destroy]
 
-  def index
-    @<%= plural_table_name %> = <%= class_name %>.all
-    render json: @<%= plural_table_name %>
-  end
+    rescue_from ActiveRecord::RecordNotFound, with: :handle_not_found
 
-  def show
-    render json: @<%= singular_table_name %>
-  end
-
-  def create
-    @<%= singular_table_name %> = <%= class_name %>.new(<%= singular_table_name %>_params)
-
-    if @<%= singular_table_name %>.save
-      render json: @<%= singular_table_name %>, status: :created
-    else
-      render json: @<%= singular_table_name %>.errors, status: :unprocessable_entity
+    def index
+      @<%= plural_table_name %> = <%= class_name %>.all
+      render json: @<%= plural_table_name %>
     end
-  end
 
-  def update
-    if @<%= singular_table_name %>.update(<%= singular_table_name %>_params)
+    def show
       render json: @<%= singular_table_name %>
-    else
-      render json: @<%= singular_table_name %>.errors, status: :unprocessable_entity
     end
-  end
 
-  def destroy
-    @<%= singular_table_name %>.destroy
-    head :no_content
-  end
+    def create
+      @<%= singular_table_name %> = <%= class_name %>.new(<%= singular_table_name %>_params)
 
-  private
+      if @<%= singular_table_name %>.save
+        render json: @<%= singular_table_name %>, status: :created
+      else
+        render json: @<%= singular_table_name %>.errors, status: :unprocessable_entity
+      end
+    end
 
-  def set_<%= singular_table_name %>
-    @<%= singular_table_name %> = <%= class_name %>.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Not found' }, status: :not_found
-  end
+    def update
+      if @<%= singular_table_name %>.update(<%= singular_table_name %>_params)
+        render json: @<%= singular_table_name %>
+      else
+        render json: @<%= singular_table_name %>.errors, status: :unprocessable_entity
+      end
+    end
 
-  def <%= singular_table_name %>_params
-    params.require(:<%= singular_table_name %>).permit(:nome, :descricao)
+    def destroy
+      @<%= singular_table_name %>.destroy
+      head :no_content
+    end
+
+    private
+
+    def set_<%= singular_table_name %>
+      @<%= singular_table_name %> = <%= class_name %>.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: 'Not found' }, status: :not_found
+    end
+
+    def <%= singular_table_name %>_params
+      params.require(:<%= singular_table_name %>).permit(:nome, :descricao)
+    end
   end
 end

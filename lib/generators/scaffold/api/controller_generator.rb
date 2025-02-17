@@ -6,7 +6,7 @@ module Scaffold
       source_root File.expand_path("templates", __dir__)
 
       def create_controller_files
-        template "controller.rb.tt", File.join("app/controllers", class_path, "#{controller_file_name}_controller.rb")
+        template "controller.rb.tt", File.join("app/controllers/v1", class_path, "#{controller_file_name}_controller.rb")
       end
     end
   end
