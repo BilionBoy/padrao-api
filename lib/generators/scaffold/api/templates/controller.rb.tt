@@ -1,5 +1,4 @@
 module V1
-
   class <%= controller_class_name %>Controller < ApplicationController
     before_action :set_<%= singular_table_name %>, only: %i[show update destroy]
 
