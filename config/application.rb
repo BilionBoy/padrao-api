@@ -10,6 +10,9 @@ module ApiTemplate
       g.scaffold_controller "scaffold/api/controller"  # Aqui informamos o caminho do gerador
     end
 
+    config.time_zone = "La Paz" # Configuração do Time Zone
+    config.i18n.default_locale = :'pt-BR' # Configuração do idioma padrão
+
     # Corrigir carregamento das pastas lib
     config.load_defaults 7.2
     config.autoload_paths += Dir[Rails.root.join("lib", "**/")]  # Certificando que subpastas sejam carregadas
