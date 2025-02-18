@@ -1,10 +1,10 @@
 require "rails/generators"
-require "rails/generators/active_record/model/model_generator"
+require "rails/generators/base"
 
 module Scaffold
   module Api
-    class ModelGenerator < Rails::Generators::NamedBase
-      source_root File.expand_path("templates", __dir__)
+    class ModelGenerator < Rails::Generators::Base # Certifique-se de que está herdando de `Base` e não de `ModelGenerator`
+      source_root File.expand_path("templates/models", __dir__)
 
       def create_model_files
         model_path = File.join("app/models", "#{file_name}.rb")
