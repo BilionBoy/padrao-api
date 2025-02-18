@@ -12,6 +12,7 @@ module ApiTemplate
     config.generators do |g|
       g.scaffold_controller "scaffold/api/controller"  # Define o gerador para controllers de scaffold
       g.model "scaffold/api/model"                     # Define o gerador para models
+      g.migration "scaffold/api/migration"             # Define o gerador para migrations
       g.orm :active_record                             # Define ActiveRecord como ORM padrão
     end
 
