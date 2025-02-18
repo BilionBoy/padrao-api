@@ -7,7 +7,7 @@ module Scaffold
 
       def create_model_files
         model_path = File.join("app/models", "#{file_name}.rb")
-        template "model.rb", model_path
+        template "model.rb.tt", model_path
       end
     end
   end
