@@ -8,9 +8,11 @@ module ApiTemplate
     # Configuração dos geradores
     config.generators do |g|
       g.scaffold_controller "scaffold/api/controller"  # Aqui informamos o caminho do gerador
+      g.model "scaffold/api/model"                     # Mapeando o gerador do model
+      g.orm :active_record                             # ORM (ActiveRecord)
     end
 
-    config.time_zone = "La Paz" # Configuração do Time Zone
+    config.time_zone = "La Paz"           # Configuração do Time Zone
     config.i18n.default_locale = :'pt-BR' # Configuração do idioma padrão
 
     # Corrigir carregamento das pastas lib

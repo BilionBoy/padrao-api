@@ -1,0 +1,14 @@
+class <%= class_name %> < ApplicationRecord
+  <% attributes.each do |attribute| -%>
+    <% if attribute.reference? -%>
+      belongs_to :<%= attribute.name %>
+    <% elsif attribute.type == :integer %>
+      validates :<%= attribute.name %>, numericality: { only_integer: true }
+    <% elsif attribute.type == :decimal %>
+      validates :<%= attribute.name %>, numericality: true
+    <% elsif attribute.type == :string %>
+      validates :<%= attribute.name %>, length: { maximum: 255 }
+    <% end %>
+  <% end -%>
+end
+ 
